@@ -63,8 +63,8 @@ defmodule PlugRailsCookieSessionStore do
     signing_salt = check_signing_salt(opts)
 
     iterations = Keyword.get(opts, :key_iterations, 1000)
-    length = Keyword.get(opts, :key_length, 32)
-    digest = Keyword.get(opts, :key_digest, :sha256)
+    length = Keyword.get(opts, :key_length, 64)
+    digest = Keyword.get(opts, :key_digest, :sha)
     key_opts = [iterations: iterations,
                 length: length,
                 digest: digest,
