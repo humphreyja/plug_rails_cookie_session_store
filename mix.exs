@@ -3,7 +3,7 @@ defmodule PlugRailsCookieSessionStore.Mixfile do
 
   def project do
     [app: :plug_rails_cookie_session_store,
-     version: "0.1.0",
+     version: "0.1.1",
      elixir: "~> 1.0",
      description: description,
      package: package,
