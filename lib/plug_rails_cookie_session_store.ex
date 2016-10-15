@@ -82,9 +82,13 @@ defmodule PlugRailsCookieSessionStore do
     key_opts = opts.key_opts
     cookie = cookie |> URI.decode_www_form
     if key = opts.encryption_salt do
+      secret = derive(conn, key, key_opts)
+      signed_secret = derive(conn, opts.signing_salt, key_opts)
+      IO.puts "S: #{inspect secret}"
+      IO.puts "S: #{inspect signed_secret}"
       MessageEncryptor.verify_and_decrypt(cookie,
-                                          derive(conn, key, key_opts),
-                                          derive(conn, opts.signing_salt, key_opts))
+                                          secret,
+                                          signed_secret)
     else
       MessageVerifier.verify(cookie, derive(conn, opts.signing_salt, key_opts))
     end |> decode(opts.serializer)
